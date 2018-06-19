@@ -5,6 +5,7 @@ My first application with Reactjs :sweat_smile:. It´s a simple app, this take a
 ```
 git clone https://github.com/josejtudela/RecipeToPDF.git
 cd RecipeToPDF
+mpm install
 npm start
 ```
 
