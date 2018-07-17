@@ -1,14 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 const jsPDF = require('jspdf');
 
-export default class CtaPDF extends React.Component{
-    constructor(props) {
-        super(props);
-    }
+class CtaPDF extends React.Component{
     handlerPDF = () =>{
-        const title = this.props.title;
-        const ingredients = this.props.ingredients;
-        const steps = this.props.steps;
+        const title = this.props.data.titleComponent.title;
+        const ingredients = this.props.data.ingredientsComponent.ingredients;
+        const steps = this.props.data.stepsComponent.steps;
 
         var doc = new jsPDF()
         let line = 20;
@@ -38,7 +36,10 @@ export default class CtaPDF extends React.Component{
     }
     render(){
         let disabled;
-        if(this.props.title !== '' && this.props.steps.length > 0 && this.props.ingredients.length > 0){
+        const title = this.props.data.titleComponent.title;
+        const ingredients = this.props.data.ingredientsComponent.ingredients;
+        const steps = this.props.data.stepsComponent.steps;
+        if(title !== '' && steps.length > 0 && ingredients.length > 0){
             disabled = false;
         } else {
             disabled = true;
@@ -49,3 +50,9 @@ export default class CtaPDF extends React.Component{
     }
         
 }
+
+const mapStateToProps = (state) => ({data: state});
+
+const CtaPDFConnected = connect( mapStateToProps )(CtaPDF);
+
+export default CtaPDFConnected;
